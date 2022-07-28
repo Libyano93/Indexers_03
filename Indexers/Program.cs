@@ -6,22 +6,25 @@ namespace Indexers
     {
         static void Main(string[] args)
         {
-            var ip = new IP(198, 168, 1, 1);
+            var ip = new IP("198.103.1.1");
 
             var firstSegments = ip[0];
+            var SecondSegments = ip[2];
 
             Console.WriteLine($"IP ADDRESS: {ip.Address}");
             Console.WriteLine($"FIRST SEGMENTS: {firstSegments}");
+            Console.WriteLine($"SECOND SEGMENTS: {SecondSegments}");
 
 
             Console.ReadKey();
         }
     }
 
-    public class IP
-    {// Using Index With IP
-        private int[] segments = new int[4];
 
+    public class IP
+    {
+        private int[] segments = new int[4];
+        // Using Index With IP
         public int this[int index]
         {
             get
@@ -34,6 +37,20 @@ namespace Indexers
                 segments[index] = value;
             }
         }
+
+        //=========================================
+       // segments 1 - 255
+        public IP(string IPAddress) // 125.126.114.1
+        {
+            var segs = IPAddress.Split(".");
+
+            for (int i = 0; i < segs.Length; i++)
+            {
+                segments[i] = Convert.ToInt32(segs[i]);
+            }
+        }
+
+        //=========================================
         public IP(int segments1, int segments2, int segments3, int segments4)
         {
             segments[0] = segments1;
