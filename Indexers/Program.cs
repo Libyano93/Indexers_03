@@ -29,27 +29,38 @@ namespace Indexers
                 {9,3,8,4,1,6,9,2,9 },
             };
             var suduko = new Suduko(inputs);
-            Console.WriteLine(suduko[4,3]);
-            //suduko[5, 2] = 10; //Just Readonly You Cant Set 
+            Console.WriteLine(suduko[10, 3]); //-1
+            suduko[4, 3] = -10;
+            Console.WriteLine(suduko[4, 3]);//6
+
             Console.ReadKey();
         }
     }
-    
+
     public class Suduko
     {
         private int[,] _matrix;
 
-        public int this[int row,int colm]
+        public int this[int row, int colm]
         {
             get
             {
+                //Validation Code
+                if (row < 0 || row > _matrix.GetLength(0) - 1)
+                    return -1;
+
+                if (colm < 0 || colm > _matrix.GetLength(1) - 1)
+                    return -1;
                 return _matrix[row, colm];
             }
 
-            //set
-            //{
-            //    _matrix[row, colm] = value;
-            //}
+            set
+            {
+                if (value < 1 || value > _matrix.GetLength(0) )
+                    return;
+
+                _matrix[row, colm] = value;
+            }
         }
         public Suduko(int[,] matrix)
         {
@@ -75,7 +86,7 @@ namespace Indexers
         }
 
         //=========================================
-       // segments 1 - 255
+        // segments 1 - 255
         public IP(string IPAddress) // 125.126.114.1
         {
             var segs = IPAddress.Split(".");
