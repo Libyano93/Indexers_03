@@ -6,20 +6,56 @@ namespace Indexers
     {
         static void Main(string[] args)
         {
-            var ip = new IP("198.103.1.1");
+            //var ip = new IP("198.103.1.1");
 
-            var firstSegments = ip[0];
-            var SecondSegments = ip[2];
+            //var firstSegments = ip[0];
+            //var SecondSegments = ip[1];
 
-            Console.WriteLine($"IP ADDRESS: {ip.Address}");
-            Console.WriteLine($"FIRST SEGMENTS: {firstSegments}");
-            Console.WriteLine($"SECOND SEGMENTS: {SecondSegments}");
+            //Console.WriteLine($"IP ADDRESS: {ip.Address}");
+            //Console.WriteLine($"FIRST SEGMENTS: {firstSegments}");
+            //Console.WriteLine($"SECOND SEGMENTS: {SecondSegments}");
+            //********************************************************
 
-
+            int[,] inputs = new int[,]
+            {
+                {8,3,5,4,1,6,9,2,4 },
+                {1,9,3,4,1,6,9,2,7 },
+                {2,4,6,8,1,6,9,2,9 },
+                {5,3,9,4,1,6,9,2,6 },
+                {6,8,5,6,1,6,9,2,2 },
+                {3,5,7,4,1,3,9,2,7 },
+                {5,9,6,4,1,6,5,2,4 },
+                {8,2,5,2,1,1,9,2,7 },
+                {9,3,8,4,1,6,9,2,9 },
+            };
+            var suduko = new Suduko(inputs);
+            Console.WriteLine(suduko[4,3]);
+            //suduko[5, 2] = 10; //Just Readonly You Cant Set 
             Console.ReadKey();
         }
     }
+    
+    public class Suduko
+    {
+        private int[,] _matrix;
 
+        public int this[int row,int colm]
+        {
+            get
+            {
+                return _matrix[row, colm];
+            }
+
+            //set
+            //{
+            //    _matrix[row, colm] = value;
+            //}
+        }
+        public Suduko(int[,] matrix)
+        {
+            _matrix = matrix;
+        }
+    }
 
     public class IP
     {
